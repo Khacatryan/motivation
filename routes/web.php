@@ -24,6 +24,13 @@ Route::prefix('/admin')->group(function (){
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+    Route::get('/add-category', 'CategoryController@addCategory')->name('add.category');
+    Route::get('/category', 'CategoryController@showCategory')->name('show.category');
+    Route::get('/days-category', 'DaysSingleCategoryController@showDaysCategory')->name('show.days.category');
+    Route::get('/add-days-category', 'DaysSingleCategoryController@addDaysCategory')->name('add.days.category');
+    Route::get('/task', 'TaskDaysController@showTask')->name('show.task');
+    Route::get('/add-task', 'TaskDaysController@addTask')->name('add.task');
+    Route::post('/add-task', 'TaskDaysController@selectCategoryTask')->name('send.task');
 
 });
 

@@ -2,7 +2,7 @@
 @section('content')
 
     <main>
-        <h1>Hello  Sergey</h1>
+        <h2>Motivation Task</h2>
     </main>
 
 
