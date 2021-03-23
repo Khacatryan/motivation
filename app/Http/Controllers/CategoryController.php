@@ -17,7 +17,11 @@ class CategoryController extends Controller
         $category->name=$request->name;
         $category->save();
         return redirect()->back();
-
+    }
+    public function showAllCategory()
+    {
+        $categories =Category::get();
+        return view('site/show-category',compact('categories'));
     }
 
 }

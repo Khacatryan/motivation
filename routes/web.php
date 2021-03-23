@@ -31,6 +31,14 @@ Route::prefix('/admin')->group(function (){
     Route::get('/task', 'TaskDaysController@showTask')->name('show.task');
     Route::get('/add-task', 'TaskDaysController@addTask')->name('add.task');
     Route::post('/add-task', 'TaskDaysController@selectCategoryTask')->name('send.task');
+    Route::get('/notification', 'TaskDaysController@tasksNotification')->name('notification.task');
+    Route::get('/add-notification', 'TaskDaysController@addNotification')->name('add.notification');
 
+});
+Route::prefix('/user')->group(function (){
+    Route::post('/day-task','TaskDaysController@taskShow')->name('site.show.task');
+    Route::post('/completed-task','TaskDaysController@completedTask')->name('site.completed.task');
+    Route::get('/category','CategoryController@showAllCategory')->name('site.show.category');
+    Route::get('/category-days/{id}','DaysSingleCategoryController@showDays')->name('site.show.days');
 });
 

@@ -28,6 +28,8 @@
                     >Add Days</a>
                     <a class="nav-link collapsed" href="{{route('show.task')}}"
                     >Add Task</a>
+                    <a class="nav-link collapsed" href="{{route('notification.task')}}"
+                    >Add Notification</a>
                 </nav>
             </div>
         </div>

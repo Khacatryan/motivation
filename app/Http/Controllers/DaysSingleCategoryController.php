@@ -10,7 +10,6 @@ class DaysSingleCategoryController extends Controller
 {
   public function showDaysCategory()
   {
-
       $category=Category::get();
       return view('admin/add-days-single-category',compact('category'));
   }
@@ -21,5 +20,11 @@ class DaysSingleCategoryController extends Controller
       $daysCategory->name=$request->name;
       $category->daysSingleCategory()->save($daysCategory);
       return redirect()->back();
+  }
+
+  public function showDays(Request $request)
+  {
+      $days=DaysSingleCategory::where('category_id',$request->id)->get();
+      return view('site/show-days-category',compact('days'));
   }
 }

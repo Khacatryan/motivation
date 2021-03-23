@@ -9,11 +9,11 @@
                 </h4>
             </div>
         @endif
-        <form method="get" action="{{route('add.task')}}">
+        <form method="get" action="{{route('add.notification')}}">
             @csrf
             <div class="form-group mx-sm-3 mb-2 col-3">
-                <label for="name">Name</label>
-                <input name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp"
+                <label for="name">Notification</label>
+                <input name="title" type="text" class="form-control" id="name" aria-describedby="emailHelp"
                        placeholder="Name">
             </div>
             <div class="form-group mx-sm-3 mb-2 col-md-3">
