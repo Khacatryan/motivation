@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Completed;
 use App\Models\DaysSingleCategory;
 use App\Models\Notification;
 use App\Models\TaskDays;
-use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskDaysController extends Controller
 {
     public function showTask()
     {
         $category=Category::get();
+
         return view('admin/add-task',compact('category'));
 
     }
@@ -34,20 +36,27 @@ class TaskDaysController extends Controller
 
     public function taskShow(Request $request)
     {
-        $nextDayID = DaysSingleCategory::where('id', '>', $request->day_id)->min('id');
-               DaysSingleCategory::where('id',$request->day_id)->update([
-           'seen'=>true
+        $completed= new Completed();
+        $completed->update([
+          'user_id'=>Auth::id(),
+          'day_id'=> $request->day_id,
+           'seen' => true
         ]);
-                DaysSingleCategory::where('id',$nextDayID)->update([
-            'seen'=>true
-        ]);
+
         $task=TaskDays::where('days_single_id',$request->day_id)->get();
         return response()->json($task);
     }
      public function completedTask(Request $request)
      {
 
-         DaysSingleCategory::where('id',$request->days_id)->update([
+         $nextDayID = DaysSingleCategory::where('id', '>', $request->days_id)->min('id');
+         $completed= new Completed();
+         $completed->insert([
+             'user_id'=>Auth::id(),
+             'day_id'=> $nextDayID,
+             'seen' => true
+         ]);
+         Completed::where('day_id',$request->days_id)->update([
              'completed'=>true
          ]);
          $not=Notification::where('days_single_id',$request->days_id)->get();

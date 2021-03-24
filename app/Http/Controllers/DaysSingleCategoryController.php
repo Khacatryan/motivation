@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Completed;
 use App\Models\DaysSingleCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DaysSingleCategoryController extends Controller
 {
@@ -18,13 +20,23 @@ class DaysSingleCategoryController extends Controller
       $category=Category::find($request->id);
       $daysCategory= new DaysSingleCategory();
       $daysCategory->name=$request->name;
-      $category->daysSingleCategory()->save($daysCategory);
       return redirect()->back();
   }
 
   public function showDays(Request $request)
   {
-      $days=DaysSingleCategory::where('category_id',$request->id)->get();
-      return view('site/show-days-category',compact('days'));
+      $day=DaysSingleCategory::where('category_id',$request->id)->min('id');
+      $days=DaysSingleCategory::with('completed')->where('category_id',$request->id)->get();
+      $completed=Completed::where('day_id',$day )->where('user_id',Auth::id())->first();
+      if($completed==null){
+          Completed::insert([
+              'user_id'=>Auth::id(),
+              'day_id'=>$day,
+              'seen'=>true
+          ]);
+      }
+      $currentShowed = auth()->user()['completed'];
+      $currentShowed = $currentShowed?$currentShowed->groupBy('day_id'):$currentShowed;
+      return view('site/show-days-category',compact('days','currentShowed'));
   }
 }

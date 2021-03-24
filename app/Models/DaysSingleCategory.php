@@ -12,4 +12,8 @@ class DaysSingleCategory extends Model
     {
         return $this->belongsTo(Category::class,'id');
     }
+    public function completed()
+    {
+        return $this->hasMany(Completed::class,'day_id','id');
+    }
 }

@@ -4,7 +4,7 @@
 <div class="grid-container">
     @foreach ($categories as $cat)
         <a href="{{route('site.show.days',['id'=>$cat->id])}}">
-            <div class="grid-item col-2">
+            <div class="grid-item ">
                 {{$cat->name}}
             </div>
         </a>
@@ -23,13 +23,14 @@
     }
 
     .grid-item {
-        height: 70px;
-        width: 70px;
+        height: 80px;
+        width: 80px;
         background: #e48d8d;
         padding: 10px;
         text-align: center;
         margin: 9px;
         justify-content: center;
+        overflow: hidden;
     }
     a {
         text-decoration: none;

@@ -14,14 +14,15 @@
         @foreach ($days as $day)
             <div class="day"
                  data-id="{{$day->id}}">
-                @if($day->seen===1 && $day->completed===1 )
+                @if((isset($currentShowed) && isset($currentShowed[$day->id]) && $currentShowed[$day->id][0]->seen===1 && $currentShowed[$day->id][0]->completed===1)
+                  )
                     <a data-toggle="modal"
                        data-target="#exampleModalCenter{{$day->id}}">
                         <div style="background: #008000" class="grid-item">
                             {{$day->name}}
                         </div>
                     </a>
-                @elseif($day->seen===1 && $day->completed===0)
+                @elseif(isset($currentShowed) && isset($currentShowed[$day->id]) && $currentShowed[$day->id][0]->seen===1 && $currentShowed[$day->id][0]->completed===0)
                     <a data-toggle="modal"
                        data-target="#exampleModalCenter{{$day->id}}">
                         <div class="completed">
@@ -59,7 +60,6 @@
                                     <button type="submit">Completed</button>
                                 @endif
                             </form>
-                            {{--                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
                         </div>
                     </div>
                 </div>
@@ -96,25 +96,7 @@
                 }
             })
         })
-        {{--$('.completed').on('click',function (){--}}
-        {{--    let days_id = $(this).attr('data-dayId');--}}
-        {{--    var url = "{{route('site.completed.task')}}";--}}
-        {{--    $.ajax({--}}
-        {{--        headers: {--}}
-        {{--            'X-CSRF-TOKEN': $('meta[name="csrf-token" ]').attr('content')--}}
-        {{--        },--}}
-        {{--        type: 'post',--}}
-        {{--        url: url,--}}
-        {{--        dataType: 'json',--}}
-        {{--        data: {--}}
-        {{--            days_id--}}
-        {{--        },--}}
-        {{--        success: function (res) {--}}
-        {{--            console.log(res)--}}
-        {{--        }--}}
-        {{--    })--}}
 
-        {{--})--}}
     });
 </script>
 

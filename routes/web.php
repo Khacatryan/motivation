@@ -33,10 +33,9 @@ Route::prefix('/admin')->group(function (){
     Route::post('/add-task', 'TaskDaysController@selectCategoryTask')->name('send.task');
     Route::get('/notification', 'TaskDaysController@tasksNotification')->name('notification.task');
     Route::get('/add-notification', 'TaskDaysController@addNotification')->name('add.notification');
-
 });
 Route::prefix('/user')->group(function (){
-    Route::post('/day-task','TaskDaysController@taskShow')->name('site.show.task');
+    Route::post('/day-task','TaskDaysController@taskShow')->name('site.show.task')->middleware('auth');
     Route::post('/completed-task','TaskDaysController@completedTask')->name('site.completed.task');
     Route::get('/category','CategoryController@showAllCategory')->name('site.show.category');
     Route::get('/category-days/{id}','DaysSingleCategoryController@showDays')->name('site.show.days');
