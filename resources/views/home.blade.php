@@ -5,19 +5,27 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in as') }} <strong>User Dashborad </strong>
+                <a class="btn badge-primary" href="{{route("site.show.category")}}">Start</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+<style>
+
+    html, body {
+        /*background-color: #fff;*/
+        background-image: url("{{asset('/storage/images/begin.jpg')}}");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        color: #636b6f;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 200;
+        height: 100vh;
+        margin: 0;
+    }
+
+</style>

@@ -2,6 +2,14 @@
 
 @section('content')
     <div class="container-fluid">
+        <div class="row">
+            <div class="col-1" style="height: 50px;width: 50px; ">
+                <img style="height: 50px;width: 50px; overflow: hidden" src="{{asset('/storage/images/coin.jpg')}}" alt="">
+                {{$countCoins}}
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
         @if(session()->has('message'))
             <div class="alert alert-success" role="alert">
                 <h4>
@@ -54,8 +62,8 @@
                             <form method="post" action="{{route('site.completed.task')}}">
                                 @csrf
                                 <input name="days_id" type='hidden' value="{{$day->id}}">
-                                @if($day->seen===1 && $day->completed===1)
-                                    <button disabled type="submit">Completed</button>
+                                @if((isset($currentShowed) && isset($currentShowed[$day->id]) && $currentShowed[$day->id][0]->seen===1 && $currentShowed[$day->id][0]->completed===1)
+                                   ) <button disabled type="submit">Completed</button>
                                 @else
                                     <button type="submit">Completed</button>
                                 @endif
@@ -141,5 +149,17 @@
 
     a {
         text-decoration: none;
+    }
+    html, body {
+        /*background-color: #fff;*/
+        background-image: url("{{asset('/storage/images/stone.jpg')}}");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        color: #636b6f;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 200;
+        height: 100vh;
+        margin: 0;
     }
 </style>

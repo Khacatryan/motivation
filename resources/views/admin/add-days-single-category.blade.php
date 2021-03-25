@@ -1,7 +1,7 @@
 @extends('layouts.admin-layout')
 @section('content')
     <div class="container-fluid">
-        <h2>Add Category</h2>
+        <h2>Add Categories Days</h2>
         <form method="get" action="{{route('add.days.category')}}">
             @csrf
             <div class="form-group mx-sm-3 mb-2 col-3" >

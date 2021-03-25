@@ -57,7 +57,8 @@ class TaskDaysController extends Controller
              'seen' => true
          ]);
          Completed::where('day_id',$request->days_id)->update([
-             'completed'=>true
+             'completed'=>true,
+             'coins'=>2,
          ]);
          $not=Notification::where('days_single_id',$request->days_id)->get();
          return redirect()->back()->with('message',$not[0]['title']);
@@ -76,5 +77,6 @@ class TaskDaysController extends Controller
          return redirect()->back()->with('message','Notification add successfully');
 
      }
+
 
 }

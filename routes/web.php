@@ -18,13 +18,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('/admin')->group(function (){
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-    Route::get('/add-category', 'CategoryController@addCategory')->name('add.category');
+    Route::post('/add-category', 'CategoryController@addCategory')->name('add.category');
     Route::get('/category', 'CategoryController@showCategory')->name('show.category');
     Route::get('/days-category', 'DaysSingleCategoryController@showDaysCategory')->name('show.days.category');
     Route::get('/add-days-category', 'DaysSingleCategoryController@addDaysCategory')->name('add.days.category');
@@ -34,10 +33,11 @@ Route::prefix('/admin')->group(function (){
     Route::get('/notification', 'TaskDaysController@tasksNotification')->name('notification.task');
     Route::get('/add-notification', 'TaskDaysController@addNotification')->name('add.notification');
 });
-Route::prefix('/user')->group(function (){
+Route::prefix('/user')->middleware('auth:web')->group(function (){
     Route::post('/day-task','TaskDaysController@taskShow')->name('site.show.task')->middleware('auth');
     Route::post('/completed-task','TaskDaysController@completedTask')->name('site.completed.task');
     Route::get('/category','CategoryController@showAllCategory')->name('site.show.category');
     Route::get('/category-days/{id}','DaysSingleCategoryController@showDays')->name('site.show.days');
+    Route::get('/coins','DaysSingleCategoryController@countCoins')->name('site.coins');
 });
 

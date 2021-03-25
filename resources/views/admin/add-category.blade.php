@@ -2,7 +2,7 @@
 @section('content')
     <div class="container-fluid">
         <h2>Add Category</h2>
-        <form method="get" action="{{route('add.category')}}">
+        <form method="post" enctype="multipart/form-data" action="{{route('add.category')}}">
             @csrf
             <div class="form-group mx-sm-3 mb-2 col-3" >
                 <label for="name">Name</label>

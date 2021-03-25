@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class DaysSingleCategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:web');
+    }
   public function showDaysCategory()
   {
       $category=Category::get();
@@ -36,7 +40,20 @@ class DaysSingleCategoryController extends Controller
           ]);
       }
       $currentShowed = auth()->user()['completed'];
+      $countCoins=self::countCoins();
       $currentShowed = $currentShowed?$currentShowed->groupBy('day_id'):$currentShowed;
-      return view('site/show-days-category',compact('days','currentShowed'));
+      return view('site/show-days-category',compact('days','currentShowed','countCoins'));
   }
+    public static function countCoins()
+    {
+        $countCoins=[];
+        $coins=Completed::select('coins')->get();
+        foreach ($coins as $coin){
+            if($coin->coins!=null){
+                array_push($countCoins,$coin->coins);
+            }
+        }
+        $countCoins= count($countCoins)*2;
+        return $countCoins;
+    }
 }
