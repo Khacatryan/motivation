@@ -32,6 +32,9 @@ Route::prefix('/admin')->group(function (){
     Route::post('/add-task', 'TaskDaysController@selectCategoryTask')->name('send.task');
     Route::get('/notification', 'TaskDaysController@tasksNotification')->name('notification.task');
     Route::get('/add-notification', 'TaskDaysController@addNotification')->name('add.notification');
+    Route::get('/edit-category', 'CategoryController@editCategory')->name('edit.category');
+    Route::get('/edit-category/{id}', 'CategoryController@editAllCategoryAndTask')->name('edit.all');
+    Route::get('/delete-category/{id}', 'CategoryController@deleteCategory')->name('delete.cat');
 });
 Route::prefix('/user')->middleware('auth:web')->group(function (){
     Route::post('/day-task','TaskDaysController@taskShow')->name('site.show.task')->middleware('auth');

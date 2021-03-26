@@ -12,4 +12,5 @@ class Category extends Model
     {
         return $this->hasMany(DaysSingleCategory::class,'category_id','id');
     }
+
 }

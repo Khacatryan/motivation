@@ -30,6 +30,9 @@
                     >Add Task</a>
                     <a class="nav-link collapsed" href="{{route('notification.task')}}"
                     >Add Notification</a>
+                    <a class="nav-link collapsed" href="{{route('edit.category')}}"
+                    >Edit Category
+                    </a>
                 </nav>
             </div>
         </div>
