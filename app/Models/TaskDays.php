@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class TaskDays extends Model
 {
-    //
+    protected $fillable=['name'];
 }

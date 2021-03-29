@@ -35,6 +35,12 @@ Route::prefix('/admin')->group(function (){
     Route::get('/edit-category', 'CategoryController@editCategory')->name('edit.category');
     Route::get('/edit-category/{id}', 'CategoryController@editAllCategoryAndTask')->name('edit.all');
     Route::get('/delete-category/{id}', 'CategoryController@deleteCategory')->name('delete.cat');
+    Route::get('/edit-day', 'CategoryController@showEditDay')->name('show.days.edit');
+    Route::post('/edit-days', 'CategoryController@editDays')->name('edit.day');
+    Route::get('/edit-single-days', 'CategoryController@editSingleDay')->name('edit.single.day');
+    Route::get('/edit-single-task', 'CategoryController@editSingleTask')->name('edit.single.task');
+    Route::get('/edit-task', 'CategoryController@editTaskShow')->name('edit.task');
+    Route::post('/edit-tasks', 'CategoryController@editTask')->name('edit.task.single');
 });
 Route::prefix('/user')->middleware('auth:web')->group(function (){
     Route::post('/day-task','TaskDaysController@taskShow')->name('site.show.task')->middleware('auth');
