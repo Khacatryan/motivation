@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\DaysSingleCategory;
 use App\Models\TaskDays;
+use Cronofy\Cronofy;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+
     public function showCategory()
     {
+
         return view('admin/add-category');
     }
     public function addCategory(Request $request)
